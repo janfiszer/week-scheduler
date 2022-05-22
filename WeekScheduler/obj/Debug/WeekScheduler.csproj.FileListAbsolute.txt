@@ -1,0 +1,10 @@
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.csproj.AssemblyReference.cache
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.csproj.GenerateResource.cache
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.csproj.CoreCompileInputs.cache
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\bin\Debug\WeekScheduler.dll
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\bin\Debug\WeekScheduler.pdb
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.dll
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.pdb
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.AddingTaskWindow.resources
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.DeletingTaskWindow.resources
+C:\Users\JF\repos\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.weekPlaner.resources
