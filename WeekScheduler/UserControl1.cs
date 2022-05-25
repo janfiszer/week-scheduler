@@ -18,13 +18,17 @@ namespace WeekScheduler
         //public DateTime aDayFormCurrentWeek { get; set; }
         
         TableLayoutPanel weekSchedule;
+
+        bool reminderShowed = false;
+
         public weekPlaner()
         {
             InitializeComponent();
 
             this.initTableLayout();
 
-            //this.Size = new Size(weekSchedule.Height + tableLocation.X, weekSchedule.Height + tableLocation.Y);
+            // interval = one second
+            this.timer.Interval = 1000;
         }
         private void initTableLayout()
         {
@@ -78,7 +82,7 @@ namespace WeekScheduler
                 this.Controls.Add(columnNames[index]);
 
                 // iteration
-                labelLocation = new Point(labelLocation.X + Week.columnWight + 2, labelLocation.Y);
+                labelLocation = new Point(labelLocation.X + Week.columnWight + 5, labelLocation.Y);
                 index++;
             }
         }
@@ -107,7 +111,7 @@ namespace WeekScheduler
                 // adding labels to Controls
                 this.Controls.Add(rowNames[index]);
 
-                labelLocation = new Point(0, labelLocation.Y + Week.rowHeight + 2);
+                labelLocation = new Point(0, labelLocation.Y + Week.rowHeight + 3);
             }
         }
         private void UserControl1_Load(object sender, EventArgs e)
@@ -195,6 +199,30 @@ namespace WeekScheduler
 
             //weekSchedule.Controls.Add(new Label());
             weekSchedule.SetRowSpan(label, 1);
+        }
+        private DateTime setSecondToZero(DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, 0);
+        }
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            foreach (var item in this.currentWeek.LabelTaskPairs)
+            {
+                Task task = item.Value;
+                int reminderTime = task.RemindBeforeInMinutes;
+                if (reminderTime != -1)
+                {
+                    DateTime nowWithSeconds = DateTime.Now;
+
+                    DateTime now = setSecondToZero(nowWithSeconds);
+
+                    if (now.AddMinutes(reminderTime).Equals(task.PlanedTime) && !reminderShowed)
+                    {
+                        reminderShowed = true;
+                        MessageBox.Show($"Your task: {task.Name}\nDescribrion: {task.Description}\nStarts in {task.RemindBeforeInMinutes} minutes", "REMINDER");
+                    }
+                }
+            }
         }
         // Gówno 
         /*

@@ -34,12 +34,18 @@ namespace WeekScheduler
         {
 
         }
-        private void initDomainUpDown(int maxDuration)
+        private void initDomainsUpDown(int maxDuration)
         {
             for (int i = maxDuration * 30; i > 0; i-= 30)
             {
                 domainUpDown1.Items.Add(i);
             }
+            int maxReminderTime = 60 * 24 * 7;
+            for (int i = maxReminderTime; i > 0; i--)
+            {
+                domainUpDown_remind.Items.Add(i);
+            }
+            domainUpDown_remind.SelectedIndex = maxReminderTime - 15;
         }
         private void initCombobox()
         {
@@ -60,7 +66,14 @@ namespace WeekScheduler
 
             // TODO: DO IT MORE SMOOTHLY, FUCKING ENUM CASTING...
             TaskType taskType = (TaskType)Enum.Parse(typeof(TaskType), comboBox1.GetItemText(comboBox1.SelectedIndex) , true);
-            Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text)/30);
+            if (checkBox1.Checked)
+            {
+                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / 30, Int32.Parse(domainUpDown_remind.Text));
+            }
+            else
+            {
+                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / 30);
+            }
             //Task = new Task(textBox1.Text, date, (TaskType)comboBox1.SelectedItem, textBox2.Text, Int32.Parse(domainUpDown1.Text));
             this.Close();
         }
@@ -68,7 +81,26 @@ namespace WeekScheduler
         private void AddingTaskWindow_Load(object sender, EventArgs e)
         {
             initCombobox();
-            initDomainUpDown(maxDuration);
+            initDomainsUpDown(maxDuration);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                domainUpDown_remind.Enabled = false;
+                checkBox1.ForeColor = Color.Gray;
+            }
+            else
+            {
+                domainUpDown_remind.Enabled = true;
+                checkBox1.ForeColor = Color.Black;
+            }
         }
     }
 }

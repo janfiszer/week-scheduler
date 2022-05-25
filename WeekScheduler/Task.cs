@@ -33,14 +33,15 @@ namespace WeekScheduler
         // one duration = half an hour
         public int Slots { get; set; }
         public TaskType Type { get; set; }
+        public int RemindBeforeInMinutes { get; set; }
         public Task()
         {
 
         }
-        public Task(string name,  DateTime planedTime, TaskType taskType, string description="", int duration=1)
+        public Task(string name,  DateTime planedTime, TaskType taskType, string description="", int duration=1, int remind=-1)
         {
             this.Name = name;
-            if (description == "")
+            if (description == String.Empty)
             {
                 this.Description = this.Name;
             }
@@ -51,6 +52,7 @@ namespace WeekScheduler
             this.PlanedTime = planedTime;
             this.Slots = duration;
             this.Type = taskType;
+            this.RemindBeforeInMinutes = remind;
         }
         public override string ToString()
         {
