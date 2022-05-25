@@ -15,11 +15,11 @@ namespace WeekScheduler
         private List<Week> weeks = new List<Week>();
         private Week currentWeek;
         private Point tableLocation = new Point(25, 20);
-        //public DateTime aDayFormCurrentWeek { get; set; }
         
-        TableLayoutPanel weekSchedule;
+        private TableLayoutPanel weekSchedule;
 
-        bool reminderShowed = false;
+        // to reminde once 
+        private bool reminderShowed = false;
 
         public weekPlaner()
         {
@@ -41,7 +41,6 @@ namespace WeekScheduler
 
             initWeekSchedule();
         }
-
         private void initWeekSchedule()
         {
             weekSchedule = currentWeek.toTableLayout();
@@ -58,11 +57,8 @@ namespace WeekScheduler
             {
                 if (label != null)
                     label.Click += new EventHandler(this.timeSlotClick);
-                //label.MouseHover += new System.EventHandler(this.SlotMouseHover);
             }
-
         }
-
         private void addColumnNames()
         {
             List<Label> columnNames = new List<Label>();
@@ -113,10 +109,6 @@ namespace WeekScheduler
 
                 labelLocation = new Point(0, labelLocation.Y + Week.rowHeight + 3);
             }
-        }
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
         }
         private int getMaxDuration(Label label)
         {

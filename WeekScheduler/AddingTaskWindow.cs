@@ -21,6 +21,7 @@ namespace WeekScheduler
 
             this.maxDuration = maxDuaration;
             this.date = date;
+
         }
         private void defaultValueChanged(object sender, EventArgs e)
         {
@@ -63,7 +64,6 @@ namespace WeekScheduler
                 return;
             }
 
-
             // TODO: DO IT MORE SMOOTHLY, FUCKING ENUM CASTING...
             TaskType taskType = (TaskType)Enum.Parse(typeof(TaskType), comboBox1.GetItemText(comboBox1.SelectedIndex) , true);
             if (checkBox1.Checked)
@@ -74,7 +74,7 @@ namespace WeekScheduler
             {
                 Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / 30);
             }
-            //Task = new Task(textBox1.Text, date, (TaskType)comboBox1.SelectedItem, textBox2.Text, Int32.Parse(domainUpDown1.Text));
+            
             this.Close();
         }
 
@@ -82,6 +82,12 @@ namespace WeekScheduler
         {
             initCombobox();
             initDomainsUpDown(maxDuration);
+
+            if (date < DateTime.Now)
+            {
+                checkBox1.Enabled = false;
+                domainUpDown_remind.Enabled = false;
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)

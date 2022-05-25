@@ -43,7 +43,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "weekPlaner";
             this.Size = new System.Drawing.Size(1090, 560);
-            this.Load += new System.EventHandler(this.UserControl1_Load);
             this.ResumeLayout(false);
 
         }
