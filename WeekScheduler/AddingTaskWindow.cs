@@ -68,11 +68,11 @@ namespace WeekScheduler
             TaskType taskType = (TaskType)Enum.Parse(typeof(TaskType), comboBox1.GetItemText(comboBox1.SelectedIndex) , true);
             if (checkBox1.Checked)
             {
-                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / 30, Int32.Parse(domainUpDown_remind.Text));
+                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / Task.SlotDurationMinutes, Int32.Parse(domainUpDown_remind.Text));
             }
             else
             {
-                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / 30);
+                Task = new Task(textBox1.Text, date, taskType, textBox2.Text, Int32.Parse(domainUpDown1.Text) / Task.SlotDurationMinutes);
             }
             
             this.Close();

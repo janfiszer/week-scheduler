@@ -35,7 +35,7 @@ namespace WeekScheduler
         public Week(DateTime startDay)
         {
             this.StartDay = startDay;
-            this.EndDay = startDay.AddDays(7);
+            this.EndDay = startDay.AddDays(6);
         }
         public static DateTime getStartDay(DateTime day)
         {
@@ -44,6 +44,11 @@ namespace WeekScheduler
             else dayOfWeek = (int)day.DayOfWeek - 1;
             return new DateTime(day.Year, day.Month, day.Day - dayOfWeek);
         }
+        public static DateTime setSecondToZero(DateTime date)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, 0);
+        }
+
         public TableLayoutPanel toTableLayout()
         {
             TableLayoutPanel scheduledWeek = new TableLayoutPanel();
@@ -97,7 +102,7 @@ namespace WeekScheduler
                 {
                     Labels[row + i, column] = null;
                 }
-                Labels[row, column].Size = new Size(Week.columnWight, (Week.rowHeight + 2) * task.Slots);
+                Labels[row, column].Size = new Size(Week.columnWight, (Week.rowHeight + 3) * task.Slots);
                 scheduledWeek.SetRowSpan(Labels[row, column], task.Slots);
             }
 
@@ -110,7 +115,7 @@ namespace WeekScheduler
 
             return scheduledWeek;
         }
-        public void addTask(Task task/*, Label label.*/)
+        public void addTask(Task task)
         {
             if (task == null)
             {
@@ -124,10 +129,7 @@ namespace WeekScheduler
             {
                 return;
             }
-            /*label.Text = task.Name;
-            label.BackColor = Task.SlotColors[task.Type];
 
-            LabelTaskPairs[label] = task;*/
             tasks.Add(task);
         }
 
@@ -185,7 +187,6 @@ namespace WeekScheduler
         public static void setLabelPropeties(Label label)
         {
             label.Text = String.Empty;
-            //Labels[i, j].Dock = DockStyle.Fill;
             label.Size = new Size(Week.columnWight + 100, Week.rowHeight + 100);
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             label.Margin = new Padding(0);

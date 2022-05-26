@@ -12,12 +12,17 @@ namespace WeekScheduler
 {
     public partial class weekPlaner: UserControl
     {
+        public int MaxWeeksFoward { get; set; }
         private List<Week> weeks = new List<Week>();
+        private List<TableLayoutPanel> weekSchedules = new List<TableLayoutPanel>();
+
+        private int currentWeekIndex = 0;
+        private TableLayoutPanel currentWeekSchedule;
         private Week currentWeek;
         private Point tableLocation = new Point(25, 20);
         
-        private TableLayoutPanel weekSchedule;
 
+        private List<Label> columnNames = new List<Label>();
         // to reminde once 
         private bool reminderShowed = false;
 
@@ -34,24 +39,39 @@ namespace WeekScheduler
         {
             DateTime staringDayOfTheWeek = Week.getStartDay(DateTime.Now);
             Week week = new Week(staringDayOfTheWeek);
+
             currentWeek = week;
+            weeks.Add(week);
 
             this.addColumnNames();
             this.addRowNames();
 
-            initWeekSchedule();
+            this.initWeekSchedule();
+            weekSchedules.Add(currentWeekSchedule);
+
+            MaxWeeksFoward = 20;
         }
         private void initWeekSchedule()
         {
-            weekSchedule = currentWeek.toTableLayout();
+            if (this.weekSchedules.Count != 0)
+            {
+                currentWeekSchedule.Visible = false;
+            }
+            refreshCurrentWeekSchedule();
+        }
+        private void refreshCurrentWeekSchedule()
+        {
+            currentWeekSchedule = currentWeek.toTableLayout();
 
-            weekSchedule.CausesValidation = false;
-            weekSchedule.Margin = new Padding(4, 4, 4, 4);
+            currentWeekSchedule.Name = currentWeek.StartDay.ToString();
 
-            weekSchedule.Location = tableLocation;
-            weekSchedule.Size = new Size(Week.columnCount * Week.columnWight + ((Week.columnCount - 1) * 3), Week.rowHeight * Week.rowCount + 52); // TODO: 55 -> maths
-            weekSchedule.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
-            this.Controls.Add(weekSchedule);
+            currentWeekSchedule.CausesValidation = false;
+            currentWeekSchedule.Margin = new Padding(4, 4, 4, 4);
+
+            currentWeekSchedule.Location = tableLocation;
+            currentWeekSchedule.Size = new Size(Week.columnCount * Week.columnWight + ((Week.columnCount - 1) * 3), Week.rowHeight * Week.rowCount + 52); // TODO: 55 -> maths
+            currentWeekSchedule.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
+            this.Controls.Add(currentWeekSchedule);
 
             foreach (Label label in currentWeek.Labels)
             {
@@ -61,11 +81,18 @@ namespace WeekScheduler
         }
         private void addColumnNames()
         {
-            List<Label> columnNames = new List<Label>();
+            // reseting previously added column names
+            foreach (Control c in columnNames)
+            {
+                this.Controls.Remove(c);
+            }
+            columnNames.Clear();
+
+
             Point labelLocation = new Point(tableLocation.X + 5, 0);
 
             int index = 0;
-            for (DateTime dt = currentWeek.StartDay; dt < currentWeek.EndDay; dt = dt.AddDays(1))
+            for (DateTime dt = currentWeek.StartDay; dt <= currentWeek.EndDay; dt = dt.AddDays(1))
             {
                 columnNames.Add(new Label());
 
@@ -146,34 +173,37 @@ namespace WeekScheduler
                     if (task == null)
                         return;
 
-                    // Adding task to apropriate collections
-                    currentWeek.addTask(task);
-
-                    this.Controls.Remove(weekSchedule);
-
-                    initWeekSchedule();
+                    addTaskAction(task);
                 }
                 else
                 {
-                    //MessageBox.Show(this.getTaskByLabel(clickedTimeSlot).ToString());
                     DeletingTaskWindow deletingTaskWindow = new DeletingTaskWindow(this, currentWeek.LabelTaskPairs[clickedTimeSlot]);
-                    deletingTaskWindow.Show();
+                    deletingTaskWindow.ShowDialog();
                 }
             }
         }
+        public void addTaskAction(Task task)
+        {
+            // Adding task to apropriate collections
+            currentWeek.addTask(task);
 
+            this.Controls.Remove(currentWeekSchedule);
+
+            refreshCurrentWeekSchedule();
+
+            weekSchedules[currentWeekIndex] = currentWeekSchedule;
+        }
         public void deleteTask(Task task)
         {
             currentWeek.deleteTask(task);
 
-            this.Controls.Remove(weekSchedule);
+            this.Controls.Remove(currentWeekSchedule);
 
             initWeekSchedule();
         }
-
-        public void clearLabel(Label label, int deletedTaskSlots)
+        public void clearLabel(Label label, int taskSlots)
         {
-            for (int i = 1; i < deletedTaskSlots; ++i)
+            for (int i = 1; i < taskSlots; ++i)
             {
                 Label l = new Label();
 
@@ -181,20 +211,13 @@ namespace WeekScheduler
 
                 l.Click += new EventHandler(this.timeSlotClick);
 
-                weekSchedule.Controls.Add(l);
+                currentWeekSchedule.Controls.Add(l);
             }
-            //currentWeek.Labels[0, 0] = label;
-
 
             label.Text = String.Empty;
             label.BackColor = SystemColors.Control;
 
-            //weekSchedule.Controls.Add(new Label());
-            weekSchedule.SetRowSpan(label, 1);
-        }
-        private DateTime setSecondToZero(DateTime date)
-        {
-            return new DateTime(date.Year, date.Month, date.Day, date.Hour, date.Minute, 0, 0);
+            currentWeekSchedule.SetRowSpan(label, 1);
         }
         private void timer_Tick(object sender, EventArgs e)
         {
@@ -206,7 +229,7 @@ namespace WeekScheduler
                 {
                     DateTime nowWithSeconds = DateTime.Now;
 
-                    DateTime now = setSecondToZero(nowWithSeconds);
+                    DateTime now = Week.setSecondToZero(nowWithSeconds);
 
                     if (now.AddMinutes(reminderTime).Equals(task.PlanedTime) && !reminderShowed)
                     {
@@ -216,26 +239,71 @@ namespace WeekScheduler
                 }
             }
         }
-        // Gówno 
-        /*
-        private void SlotMouseHover(object sender, EventArgs e)
-        {
-            Label timeSlot = sender as Label;
-            if (timeSlot == null)
-                return;
 
-            if (timeSlot.Text == String.Empty)
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (button1.Enabled == false)
             {
-                timeSlot.BackColor = Color.White;
+                button1.Enabled = true;
+            }
+            // memory safty
+            if (weeks.Count > MaxWeeksFoward)
+            {
+                button2.Enabled = false;
+            }
+            /*
+            currentWeekIndex++;
+
+            currentWeek = weeks[currentWeekIndex];
+
+            initWeekSchedule();*/
+            
+            //int index = weekSchedules.IndexOf(currentWeekSchedule);
+            
+            currentWeekIndex++;
+
+            if (currentWeekIndex == weekSchedules.Count)
+            {
+                Week week = new Week(currentWeek.StartDay.AddDays(7));
+                weeks.Add(week);
+
+                currentWeek = week;
+
+                this.initWeekSchedule();
+
+                weekSchedules.Add(currentWeekSchedule);
             }
             else
             {
-                if (currentWeek.LabelTaskPairs[timeSlot].Type == TaskType.SCHOOL)
-                {
-                    timeSlot.BackColor = Color.Pink;
-                }
+                currentWeekSchedule.Visible = false;
+
+                // moving one forward
+                currentWeek = weeks[currentWeekIndex];
+                currentWeekSchedule = weekSchedules[currentWeekIndex];
+
+                currentWeekSchedule.Visible = true;
             }
 
-        }*/
+            this.addColumnNames();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            currentWeekSchedule.Visible = false;
+
+            // moving one backword
+            currentWeekIndex--;
+            currentWeekSchedule = weekSchedules[currentWeekIndex];
+            currentWeek = weeks[currentWeekIndex];
+
+            currentWeekSchedule.Visible = true;
+
+            this.addColumnNames();
+
+            if (currentWeekIndex == 0)
+            {
+                button1.Enabled = false;
+            }
+        }
     }
 }

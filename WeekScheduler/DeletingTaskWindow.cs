@@ -39,12 +39,9 @@ namespace WeekScheduler
             date = date.Remove(date.Length - 3, 3);
 
             label3.Text = $"{date} - {endingTime.Hour}:{minutes}";
-            
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            //main.clearLabel(clickedTimeSlot, currentWeek.LabelTaskPairs[clickedTimeSlot].Slots);
-
             main.deleteTask(taskToDelete);
 
             this.Close();
