@@ -1,0 +1,14 @@
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\bin\Debug\TestingWeekPlanetForm.exe.config
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\bin\Debug\TestingWeekPlanetForm.exe
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\bin\Debug\TestingWeekPlanetForm.pdb
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\bin\Debug\WeekScheduler.dll
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\bin\Debug\WeekScheduler.pdb
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.csproj.AssemblyReference.cache
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.csproj.SuggestedBindingRedirects.cache
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.Form1.resources
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.Properties.Resources.resources
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.csproj.GenerateResource.cache
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.csproj.CoreCompileInputs.cache
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.csproj.CopyComplete
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.exe
+C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\TestingWeekPlanetForm\obj\Debug\TestingWeekPlanetForm.pdb

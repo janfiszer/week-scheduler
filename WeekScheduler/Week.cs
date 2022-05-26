@@ -77,7 +77,6 @@ namespace WeekScheduler
                 for (int j = 0; j < columnCount; j++)
                 {
                     Labels[i, j] = new Label();
-                    //Labels[i, j].Text = "label nr " + i.ToString() + " is empty";
                     setLabelPropeties(Labels[i, j]);
                 }
             }
@@ -190,7 +189,7 @@ namespace WeekScheduler
             label.Size = new Size(Week.columnWight + 100, Week.rowHeight + 100);
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             label.Margin = new Padding(0);
-            label.Font = new Font("Showcard Gothic", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(238)));
+            label.Font = new Font("Century Gothic", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(238)));
         }
     }
 }

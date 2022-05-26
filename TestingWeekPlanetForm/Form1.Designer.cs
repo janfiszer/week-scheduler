@@ -1,6 +1,6 @@
-﻿namespace WeekScheduler
+﻿namespace TestingWeekPlanetForm
 {
-    partial class ControlTesting
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -36,23 +36,24 @@
             this.weekPlaner1.Location = new System.Drawing.Point(13, 13);
             this.weekPlaner1.MaxWeeksFoward = 20;
             this.weekPlaner1.Name = "weekPlaner1";
-            this.weekPlaner1.Size = new System.Drawing.Size(1107, 562);
+            this.weekPlaner1.Size = new System.Drawing.Size(1090, 560);
             this.weekPlaner1.TabIndex = 0;
             // 
-            // ControlTesting
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1132, 615);
+            this.ClientSize = new System.Drawing.Size(1149, 617);
             this.Controls.Add(this.weekPlaner1);
-            this.Name = "ControlTesting";
-            this.Text = "ControlTesting";
+            this.Name = "Form1";
+            this.Text = "Form1";
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private weekPlaner weekPlaner1;
+        private WeekScheduler.weekPlaner weekPlaner1;
     }
 }
+

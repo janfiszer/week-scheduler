@@ -18,4 +18,3 @@ C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\WeekScheduler\obj\Debug\WeekSc
 C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.csproj.CoreCompileInputs.cache
 C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.dll
 C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.pdb
-C:\Users\jjasi\studia\semestr 4\PZ2\WeekScheduler\WeekScheduler\obj\Debug\WeekScheduler.ControlTesting.resources

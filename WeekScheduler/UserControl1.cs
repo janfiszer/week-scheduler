@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WeekScheduler
 {
-    public partial class weekPlaner: UserControl
+    public partial class weekPlaner : UserControl
     {
         public int MaxWeeksFoward { get; set; }
         private List<Week> weeks = new List<Week>();
@@ -20,7 +15,7 @@ namespace WeekScheduler
         private TableLayoutPanel currentWeekSchedule;
         private Week currentWeek;
         private Point tableLocation = new Point(25, 20);
-        
+
 
         private List<Label> columnNames = new List<Label>();
         // to reminde once 
@@ -241,7 +236,6 @@ namespace WeekScheduler
                 }
             }
         }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (button1.Enabled == false)
@@ -253,15 +247,6 @@ namespace WeekScheduler
             {
                 button2.Enabled = false;
             }
-            /*
-            currentWeekIndex++;
-
-            currentWeek = weeks[currentWeekIndex];
-
-            initWeekSchedule();*/
-            
-            //int index = weekSchedules.IndexOf(currentWeekSchedule);
-            
             currentWeekIndex++;
 
             if (currentWeekIndex == weekSchedules.Count)
@@ -288,7 +273,6 @@ namespace WeekScheduler
 
             this.addColumnNames();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             currentWeekSchedule.Visible = false;

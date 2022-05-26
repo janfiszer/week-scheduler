@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WeekScheduler
+namespace TestingWeekPlanetForm
 {
-    public partial class ControlTesting : Form
+    public partial class Form1 : Form
     {
-        public ControlTesting()
+        public Form1()
         {
             InitializeComponent();
         }
