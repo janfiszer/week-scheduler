@@ -49,6 +49,12 @@
     <Compile Include="AddingTaskWindow.Designer.cs">
       <DependentUpon>AddingTaskWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlTesting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ControlTesting.Designer.cs">
+      <DependentUpon>ControlTesting.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeletingTaskWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AddingTaskWindow.resx">
       <DependentUpon>AddingTaskWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlTesting.resx">
+      <DependentUpon>ControlTesting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeletingTaskWindow.resx">
       <DependentUpon>DeletingTaskWindow.cs</DependentUpon>

@@ -199,7 +199,9 @@ namespace WeekScheduler
 
             this.Controls.Remove(currentWeekSchedule);
 
-            initWeekSchedule();
+            refreshCurrentWeekSchedule();
+
+            weekSchedules[currentWeekIndex] = currentWeekSchedule;
         }
         public void clearLabel(Label label, int taskSlots)
         {
